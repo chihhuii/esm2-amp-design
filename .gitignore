@@ -1,0 +1,16 @@
+# Data and outputs
+outputs/embeddings.npy
+outputs/gen_embeddings.npy
+outputs/embedding_2d.npy
+outputs/gen_2d.npy
+data/
+*.npy
+
+# Logs
+jobs/*.out
+jobs/*.err
+
+# Python
+__pycache__/
+*.pyc
+.env
