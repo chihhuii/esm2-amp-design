@@ -16,7 +16,7 @@ def parse_fasta(filepath):
                 sequences[current_id] = line
     return sequences
 
-# 데이터 로드
+# 데이터 로드, load the data
 data_dir = Path('data')
 seqs = {}
 for fasta_file in data_dir.glob('*.txt'):
@@ -26,7 +26,7 @@ ids = list(seqs.keys())
 sequences = list(seqs.values())
 print(f'총 서열 수: {len(sequences)}')
 
-# 모델 로드
+# 모델 로드, load the model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f'사용 디바이스: {device}')
 
@@ -35,7 +35,7 @@ model = EsmModel.from_pretrained('facebook/esm2_t33_650M_UR50D')
 model = model.to(device)
 model.eval()
 
-# 배치 임베딩
+# 배치 임베딩, batch embedding
 batch_size = 32
 embeddings = []
 
@@ -56,7 +56,7 @@ for i in range(0, len(sequences), batch_size):
 
 embeddings = np.vstack(embeddings)
 
-# 저장
+# 저장, save
 output_dir = Path('outputs')
 output_dir.mkdir(exist_ok=True)
 np.save(output_dir / 'embeddings.npy', embeddings)
